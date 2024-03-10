@@ -105,14 +105,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startIt() {
-        soundPool.play(
-            startPeriodSound,
-            0.0f,
-            0.0f,
-            0,
-            0,
-            1.0f
-        ) // this seems to "warm up" the SoundPool so that future sounds are played in sync
         currentlyRunning = true
         imageButton.setImageResource(R.drawable.baseline_pause_circle_outline_150)
         val pingPeriodSeconds = getEditTextValue(R.id.ping_period)
