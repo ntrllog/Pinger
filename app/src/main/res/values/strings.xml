@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Pinger</string>
+    <string name="seconds">seconds</string>
+    <string name="continuous">Continuous Mode</string>
+    <string name="ping_period">Ping Period</string>
+    <string name="rest_period">Rest Period</string>
+    <string name="play">Play</string>
+    <string name="start_period">Start Period</string>
+    <string name="help">Help!</string>
+    <string name="ping_period_explanation">Ping period: This is the main thing that you are timing. A ping plays at the start of the ping period; then after x seconds, another ping plays to signal the end of the ping period. If continuous mode is on, then the ping period will be repeated.</string>
+    <string name="start_period_explanation">Start period: This is the time for you to prepare for the ping period. If the start period is y seconds, then the app will count down from y before starting the ping period. When there are 3 seconds left, a ping will be played each second until the start period is over. The start period only happens once (before the ping period), regardless of whether continuous mode is on or off.</string>
+    <string name="rest_period_explanation">Rest period: This is the time for you to rest before starting a new ping period. If the rest period is z seconds, then the app will count down from z before starting the ping period. When there are 5 seconds left, a ping will be played each second until the rest period is over. The rest period only happens after each ping period and only if continuous mode is on.</string>
+    <string name="start_period_message">Start Period: %d</string>
+    <string name="ping_period_message">Ping Period: %d</string>
+    <string name="rest_period_message">Rest Period: %d</string>
+</resources>
