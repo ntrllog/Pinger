@@ -97,24 +97,42 @@
 
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/image_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_centerHorizontal="true"
-        android:background="@color/white"
-        android:contentDescription="@string/play"
-        android:src="@drawable/baseline_play_circle_outline_150"
-        android:tag="@drawable/baseline_play_circle_outline_150" />
-
-    <TextView
-        android:id="@+id/status_text"
+    <RelativeLayout
+        android:id="@+id/buttons_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/image_button"
-        android:layout_alignParentBottom="true"
-        android:gravity="center"
-        android:text="" />
+        android:layout_centerVertical="true">
+
+        <ImageButton
+            android:id="@+id/play_pause_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@color/white"
+            android:contentDescription="@string/play"
+            android:src="@drawable/baseline_play_circle_outline_150"
+            android:tag="@drawable/baseline_play_circle_outline_150" />
+
+        <TextView
+            android:id="@+id/status_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/play_pause_button"
+            android:gravity="center"
+            android:text="" />
+
+        <ImageButton
+            android:id="@+id/stop_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/status_text"
+            android:layout_centerHorizontal="true"
+            android:background="@color/white"
+            android:visibility="invisible"
+            android:contentDescription="@string/stop"
+            android:src="@drawable/baseline_check_box_outline_blank_100"
+            android:tag="@drawable/baseline_check_box_outline_blank_100" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

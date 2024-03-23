@@ -13,4 +13,5 @@
     <string name="start_period_message">Start Period: %d</string>
     <string name="ping_period_message">Ping Period: %d</string>
     <string name="rest_period_message">Rest Period: %d</string>
+    <string name="stop">Stop</string>
 </resources>

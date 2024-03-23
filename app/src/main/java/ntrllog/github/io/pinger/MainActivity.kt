@@ -25,7 +25,8 @@ class MainActivity : AppCompatActivity() {
     private var currentlyRunning = false
 
     private lateinit var statusText: TextView
-    private lateinit var imageButton: ImageButton
+    private lateinit var playPauseButton: ImageButton
+    private lateinit var stopButton: ImageButton
 
     private lateinit var handler: Handler
 
@@ -35,15 +36,23 @@ class MainActivity : AppCompatActivity() {
     private var pingPeriodStartSound: Int = 0
     private var pingPeriodEndSound: Int = 0
 
+    private var currCountdown: Int = 0 // keep track of how many seconds are left when paused
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         statusText = findViewById(R.id.status_text)
+        setStatusText("")
 
-        imageButton = findViewById(R.id.image_button)
-        imageButton.setOnClickListener {
+        playPauseButton = findViewById(R.id.play_pause_button)
+        playPauseButton.setOnClickListener {
             toggleAction()
+        }
+
+        stopButton = findViewById(R.id.stop_button)
+        stopButton.setOnClickListener {
+            stopIt()
         }
 
         handler = Handler(Looper.getMainLooper())
@@ -59,9 +68,9 @@ class MainActivity : AppCompatActivity() {
             )
             .build()
         startPeriodSound = soundPool.load(this, R.raw.sound28, 1)
-        pingPeriodStartSound = soundPool.load(this, R.raw.cling, 1)
+        pingPeriodStartSound = soundPool.load(this, R.raw.cling_1, 1)
         pingPeriodEndSound = soundPool.load(this, R.raw.sound52, 1)
-        restPeriodSound = soundPool.load(this, R.raw.beep, 1)
+        restPeriodSound = soundPool.load(this, R.raw.beep_3, 1)
 
         val continuousModeSwitch = findViewById<SwitchMaterial>(R.id.continuous_mode_switch)
         val restPeriodLinearLayout = findViewById<LinearLayout>(R.id.linear_layout_rest_period)
@@ -92,7 +101,7 @@ class MainActivity : AppCompatActivity() {
     private fun toggleAction() {
         hideKeyboard()
         if (currentlyRunning) {
-            stopIt()
+            pauseIt()
         } else {
             startIt()
         }
@@ -101,12 +110,21 @@ class MainActivity : AppCompatActivity() {
     private fun stopIt() {
         currentlyRunning = false
         setStatusText("")
-        imageButton.setImageResource(R.drawable.baseline_play_circle_outline_150)
+        playPauseButton.setImageResource(R.drawable.baseline_play_circle_outline_150)
+        playPauseButton.visibility = LinearLayout.VISIBLE
+        stopButton.visibility = LinearLayout.INVISIBLE
+        currCountdown = 0
+    }
+
+    private fun pauseIt() {
+        currentlyRunning = false
+        playPauseButton.setImageResource(R.drawable.baseline_play_circle_outline_150)
     }
 
     private fun startIt() {
         currentlyRunning = true
-        imageButton.setImageResource(R.drawable.baseline_pause_circle_outline_150)
+        playPauseButton.setImageResource(R.drawable.baseline_pause_circle_outline_150)
+        stopButton.visibility = LinearLayout.VISIBLE
         val pingPeriodSeconds = getEditTextValue(R.id.ping_period)
         if (pingPeriodSeconds == 0) {
             handler.post {
@@ -115,7 +133,11 @@ class MainActivity : AppCompatActivity() {
             }
             stopIt()
         } else {
-            startStartPeriod()
+            if (currCountdown > 0) {
+                resumePingPeriod()
+            } else {
+                startStartPeriod()
+            }
         }
     }
 
@@ -126,6 +148,8 @@ class MainActivity : AppCompatActivity() {
         if (countdown in 1..3) {
             playSound(startPeriodSound)
         }
+
+        playPauseButton.visibility = LinearLayout.INVISIBLE
 
         setStatusText(getString(R.string.start_period_message, countdown))
 
@@ -156,6 +180,8 @@ class MainActivity : AppCompatActivity() {
 
         playSound(pingPeriodStartSound)
 
+        playPauseButton.visibility = LinearLayout.VISIBLE
+
         setStatusText(getString(R.string.ping_period_message, countdown))
 
         handler.postDelayed(object : Runnable {
@@ -164,6 +190,7 @@ class MainActivity : AppCompatActivity() {
                     return
                 } else {
                     --countdown
+                    currCountdown = countdown
                     setStatusText(getString(R.string.ping_period_message, countdown))
                     if (countdown <= 0) {
                         playSound(pingPeriodEndSound)
@@ -189,6 +216,8 @@ class MainActivity : AppCompatActivity() {
             playSound(restPeriodSound)
         }
 
+        playPauseButton.visibility = LinearLayout.INVISIBLE
+
         setStatusText(getString(R.string.rest_period_message, countdown))
 
         handler.postDelayed(object : Runnable {
@@ -203,6 +232,36 @@ class MainActivity : AppCompatActivity() {
                     setStatusText(getString(R.string.rest_period_message, countdown))
                     if (countdown <= 0) {
                         startPingPeriod()
+                        return
+                    }
+                    // reschedule the task
+                    handler.postDelayed(this, 1000L)
+                }
+            }
+        }, 1000L)
+    }
+
+    private fun resumePingPeriod() {
+        val pingPeriodSeconds = currCountdown
+        var countdown = pingPeriodSeconds
+
+        setStatusText(getString(R.string.ping_period_message, countdown))
+
+        handler.postDelayed(object : Runnable {
+            override fun run() {
+                if (!currentlyRunning) { // stop button is pressed
+                    return
+                } else {
+                    --countdown
+                    currCountdown = countdown
+                    setStatusText(getString(R.string.ping_period_message, countdown))
+                    if (countdown <= 0) {
+                        playSound(pingPeriodEndSound)
+                        if (continuousMode) {
+                            startRestPeriod()
+                        } else {
+                            stopIt()
+                        }
                         return
                     }
                     // reschedule the task
