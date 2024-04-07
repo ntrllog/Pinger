@@ -2,6 +2,8 @@
 
 An Android app of a custom stopwatch
 
+App available on [Google Play Store](https://play.google.com/store/apps/details?id=ntrllog.github.io.pinger)
+
 When working out in the gym, I like to do some exercises for a certain amount of time rather than for a number of reps. However, a simple stopwatch doesn't work for me because from the time I press start to the time I actually start my set, some seconds have passed. To solve this, this app has a start period so that I can get into position (e.g., picking up dumbbells) during the start period.
 
 For my ab workout, I do a number of different exercises for 1 minute (each exercise) with 8-10 seconds rest in between each one. Continuous mode is there so I don't have to keep starting the app when the time is done.
