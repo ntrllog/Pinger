@@ -8,7 +8,9 @@ When working out in the gym, I like to do some exercises for a certain amount of
 
 For my ab workout, I do a number of different exercises for 1 minute (each exercise) with 8-10 seconds rest in between each one. Continuous mode is there so I don't have to keep starting the app when the time is done.
 
-Also, I want an auditory cue to tell me when the specified time has passed. That way, I don't have to keep looking at my phone. In fact, if I don't know how much time I have left, then I won't cheat my reps by giving up early.
+Continuous mode also helps me keep track of my rest period so I don't rest too long.
+
+It really helps to have an auditory cue tell me when the specified time has passed. That way, I don't have to keep looking at my phone. In fact, if I don't know how much time I have left, then I won't cheat my reps by giving up early.
 
 ## Screenshots
 ![Alt text](/screenshots/non_continuous.jpg?raw=true)
@@ -19,3 +21,8 @@ Also, I want an auditory cue to tell me when the specified time has passed. That
 ## Resources
 
 Sounds downloaded from https://www.pacdv.com/sounds/index.html
+
+## Known Bugs
+
+- Pausing, stopping, starting too fast (e.g., pausing right when the ping period starts or stopping and starting immediately after) can lead to unintended consequences.
+  - This is because I keep track of how many seconds have passed, instead of keeping track of milliseconds or nanoseconds.
