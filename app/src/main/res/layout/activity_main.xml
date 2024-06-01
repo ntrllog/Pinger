@@ -84,10 +84,37 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linear_layout_dual_period"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linear_layout_rest_period"
+        android:orientation="horizontal"
+        android:visibility="invisible">
+
+        <EditText
+            android:id="@+id/dual_period"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="@string/dual_period"
+            android:importantForAutofill="no"
+            android:inputType="number" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/seconds" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/linear_layout_continuous_mode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/linear_layout_rest_period">
+        android:layout_below="@id/linear_layout_dual_period">
 
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/continuous_mode_switch"
@@ -97,11 +124,25 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/linear_layout_dual_mode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linear_layout_continuous_mode">
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/dual_mode_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/dual_mode" />
+
+    </LinearLayout>
+
     <RelativeLayout
         android:id="@+id/buttons_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true">
+        android:layout_below="@id/linear_layout_dual_mode">
 
         <ImageButton
             android:id="@+id/play_pause_button"

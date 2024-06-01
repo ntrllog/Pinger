@@ -14,4 +14,8 @@
     <string name="ping_period_message">Ping Period: %d</string>
     <string name="rest_period_message">Rest Period: %d</string>
     <string name="stop">Stop</string>
+    <string name="dual_mode">Dual Mode</string>
+    <string name="dual_period">Dual Period</string>
+    <string name="dual_period_explanation">Dual Period: Dual mode is for timing two actions before the rest period. The dual period is the time for you to prepare for the second action before the ping period starts. If dual mode is on, then the flow will be (start period) -> (ping period) -> (dual period) -> (ping period). If both dual mode and continuous mode are on, then the flow will be (start period) -> (ping period) -> (dual period) -> (ping period) -> (rest period) -> … .</string>
+    <string name="dual_period_message">Dual Period: %d</string>
 </resources>

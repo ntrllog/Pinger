@@ -23,6 +23,8 @@ import com.google.android.material.switchmaterial.SwitchMaterial
 class MainActivity : AppCompatActivity() {
     private var continuousMode = false
     private var currentlyRunning = false
+    private var dualMode = false
+    private var dualSet = 1 // keep track of which ping period is going to be active for dual mode (either 1 or 2)
 
     private lateinit var statusText: TextView
     private lateinit var playPauseButton: ImageButton
@@ -35,6 +37,7 @@ class MainActivity : AppCompatActivity() {
     private var startPeriodSound: Int = 0
     private var pingPeriodStartSound: Int = 0
     private var pingPeriodEndSound: Int = 0
+    private var dualPeriodStartSound: Int = 0
 
     private var currCountdown: Int = 0 // keep track of how many seconds are left when paused
 
@@ -71,12 +74,20 @@ class MainActivity : AppCompatActivity() {
         pingPeriodStartSound = soundPool.load(this, R.raw.cling_1, 1)
         pingPeriodEndSound = soundPool.load(this, R.raw.sound52, 1)
         restPeriodSound = soundPool.load(this, R.raw.beep_3, 1)
+        dualPeriodStartSound = soundPool.load(this, R.raw.sound99, 1)
 
         val continuousModeSwitch = findViewById<SwitchMaterial>(R.id.continuous_mode_switch)
         val restPeriodLinearLayout = findViewById<LinearLayout>(R.id.linear_layout_rest_period)
+        val dualModeSwitch = findViewById<SwitchMaterial>(R.id.dual_mode_switch)
+        val dualPeriodLinearLayout = findViewById<LinearLayout>(R.id.linear_layout_dual_period)
         continuousModeSwitch.setOnCheckedChangeListener { _, isChecked ->
             continuousMode = isChecked
             restPeriodLinearLayout.visibility =
+                if (isChecked) LinearLayout.VISIBLE else LinearLayout.INVISIBLE
+        }
+        dualModeSwitch.setOnCheckedChangeListener { _, isChecked ->
+            dualMode = isChecked
+            dualPeriodLinearLayout.visibility =
                 if (isChecked) LinearLayout.VISIBLE else LinearLayout.INVISIBLE
         }
     }
@@ -123,6 +134,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun startIt() {
         currentlyRunning = true
+        dualSet = 1
         playPauseButton.setImageResource(R.drawable.baseline_pause_circle_outline_150)
         stopButton.visibility = LinearLayout.VISIBLE
         val pingPeriodSeconds = getEditTextValue(R.id.ping_period)
@@ -194,10 +206,15 @@ class MainActivity : AppCompatActivity() {
                     setStatusText(getString(R.string.ping_period_message, countdown))
                     if (countdown <= 0) {
                         playSound(pingPeriodEndSound)
-                        if (continuousMode) {
+                        if (dualMode && dualSet == 1) {
+                            startDualPeriod()
+                        } else if (continuousMode) {
                             startRestPeriod()
                         } else {
                             stopIt()
+                        }
+                        if (dualMode) {
+                            dualSet = (dualSet % 2) + 1 // toggle between 1 and 2
                         }
                         return
                     }
@@ -257,10 +274,49 @@ class MainActivity : AppCompatActivity() {
                     setStatusText(getString(R.string.ping_period_message, countdown))
                     if (countdown <= 0) {
                         playSound(pingPeriodEndSound)
-                        if (continuousMode) {
+                        if (dualMode && dualSet == 1) {
+                            startDualPeriod()
+                        } else if (continuousMode) {
                             startRestPeriod()
                         } else {
                             stopIt()
+                        }
+                        if (dualMode) {
+                            dualSet = (dualSet % 2) + 1 // toggle between 1 and 2
+                        }
+                        return
+                    }
+                    // reschedule the task
+                    handler.postDelayed(this, 1000L)
+                }
+            }
+        }, 1000L)
+    }
+
+    private fun startDualPeriod() {
+        val dualPeriodSeconds = getEditTextValue(R.id.dual_period)
+        var countdown = dualPeriodSeconds
+
+        if (countdown in 1..5) {
+            playSound(dualPeriodStartSound)
+        }
+
+        playPauseButton.visibility = LinearLayout.INVISIBLE
+
+        setStatusText(getString(R.string.dual_period_message, countdown))
+
+        handler.postDelayed(object : Runnable {
+            override fun run() {
+                if (!currentlyRunning) { // stop button is pressed
+                    return
+                } else {
+                    --countdown
+                    setStatusText(getString(R.string.dual_period_message, countdown))
+                    if (countdown <= 0) {
+                        if (dualSet == 2) {
+                            startPingPeriod()
+                        } else {
+                            startRestPeriod()
                         }
                         return
                     }
