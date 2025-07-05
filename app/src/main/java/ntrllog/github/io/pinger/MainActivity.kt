@@ -134,9 +134,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun startIt() {
         currentlyRunning = true
-        dualSet = 1
+
         playPauseButton.setImageResource(R.drawable.baseline_pause_circle_outline_150)
         stopButton.visibility = LinearLayout.VISIBLE
+
         val pingPeriodSeconds = getEditTextValue(R.id.ping_period)
         if (pingPeriodSeconds == 0) {
             handler.post {
@@ -148,6 +149,7 @@ class MainActivity : AppCompatActivity() {
             if (currCountdown > 0) {
                 resumePingPeriod()
             } else {
+                dualSet = 1
                 startStartPeriod()
             }
         }
