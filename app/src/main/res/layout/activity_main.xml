@@ -2,13 +2,27 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:id="@+id/root_layout"
     android:padding="24dp">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/top_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.Material3.Dark.ActionBar"
+        app:title="@string/app_name"
+        app:menu="@menu/menu"
+        android:layout_alignParentTop="true" />
 
     <LinearLayout
         android:id="@+id/linear_layout_start_period"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/top_app_bar"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <EditText
@@ -16,6 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:minHeight="48dp"
             android:hint="@string/start_period"
             android:importantForAutofill="no"
             android:inputType="number" />
@@ -42,6 +57,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:minHeight="48dp"
             android:hint="@string/ping_period"
             android:importantForAutofill="no"
             android:inputType="number" />
@@ -69,6 +85,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:minHeight="48dp"
             android:hint="@string/rest_period"
             android:importantForAutofill="no"
             android:inputType="number" />
@@ -96,6 +113,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:minHeight="48dp"
             android:hint="@string/dual_period"
             android:importantForAutofill="no"
             android:inputType="number" />
