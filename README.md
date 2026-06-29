@@ -22,7 +22,3 @@ It really helps to have an auditory cue tell me when the specified time has pass
 
 Sounds downloaded from https://www.pacdv.com/sounds/index.html
 
-## Known Bugs
-
-- Pausing, stopping, starting too fast (e.g., pausing right when the ping period starts or stopping and starting immediately after) can lead to unintended consequences.
-  - This is because I keep track of how many seconds have passed, instead of keeping track of milliseconds or nanoseconds.

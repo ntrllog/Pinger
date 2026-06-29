@@ -1,6 +1,6 @@
 [versions]
-agp = "8.11.0"
-kotlin = "1.9.0"
+agp = "9.2.1"
+kotlin = "2.2.10"
 coreKtx = "1.12.0"
 junit = "4.13.2"
 junitVersion = "1.1.5"
@@ -36,4 +36,5 @@ androidx-activity = { group = "androidx.activity", name = "activity", version.re
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlinCompose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 

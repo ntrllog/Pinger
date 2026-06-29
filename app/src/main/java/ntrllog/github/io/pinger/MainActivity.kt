@@ -1,6 +1,5 @@
 package ntrllog.github.io.pinger
 
-import android.content.Context
 import android.content.Intent
 import android.media.AudioAttributes
 import android.media.AudioManager
@@ -9,7 +8,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.TypedValue
-import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -143,6 +141,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun stopIt() {
         currentlyRunning = false
+        handler.removeCallbacksAndMessages(null)
         setStatusText("")
         playPauseButton.setImageResource(R.drawable.baseline_play_circle_outline_150)
         playPauseButton.visibility = LinearLayout.VISIBLE
@@ -152,6 +151,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun pauseIt() {
         currentlyRunning = false
+        handler.removeCallbacksAndMessages(null)
         playPauseButton.setImageResource(R.drawable.baseline_play_circle_outline_150)
     }
 
@@ -365,7 +365,7 @@ class MainActivity : AppCompatActivity() {
         findViewById<EditText>(id).text.toString().toIntOrNull() ?: 0
 
     private fun hideKeyboard() {
-        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
     }
 }
