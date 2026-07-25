@@ -11,7 +11,7 @@ android {
     defaultConfig {
         applicationId = "ntrllog.github.io.pinger"
         minSdk = 21
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 4
         versionName = "1.3"
 
