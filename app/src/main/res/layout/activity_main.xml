@@ -169,7 +169,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:background="@color/white"
+            android:background="@drawable/play_pause_button_background"
             android:contentDescription="@string/play"
             android:src="@drawable/baseline_play_circle_outline_150"
             android:tag="@drawable/baseline_play_circle_outline_150" />
