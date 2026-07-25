@@ -13,10 +13,6 @@
         android:theme="@style/Theme.Pinger"
         tools:targetApi="31">
         <activity
-            android:name=".ExplanationActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Pinger"/>
-        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.Pinger">

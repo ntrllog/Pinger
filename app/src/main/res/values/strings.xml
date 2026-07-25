@@ -6,16 +6,11 @@
     <string name="rest_period">Rest Period</string>
     <string name="play">Play</string>
     <string name="start_period">Start Period</string>
-    <string name="help">Help!</string>
-    <string name="ping_period_explanation">Ping period: This is the main thing that you are timing. A ping plays at the start of the ping period; then after x seconds, another ping plays to signal the end of the ping period. If continuous mode is on, then the ping period will be repeated.</string>
-    <string name="start_period_explanation">Start period: This is the time for you to prepare for the ping period. If the start period is y seconds, then the app will count down from y before starting the ping period. When there are 3 seconds left, a ping will be played each second until the start period is over. The start period only happens once (before the ping period), regardless of whether continuous mode is on or off.</string>
-    <string name="rest_period_explanation">Rest period: This is the time for you to rest before starting a new ping period. If the rest period is z seconds, then the app will count down from z before starting the ping period. When there are 5 seconds left, a ping will be played each second until the rest period is over. The rest period only happens after each ping period and only if continuous mode is on.</string>
     <string name="start_period_message">Start Period: %d</string>
     <string name="ping_period_message">Ping Period: %d</string>
     <string name="rest_period_message">Rest Period: %d</string>
     <string name="stop">Stop</string>
     <string name="dual_mode">Dual Mode</string>
     <string name="dual_period">Dual Period</string>
-    <string name="dual_period_explanation">Dual Period: Dual mode is for timing two actions before the rest period. The dual period is the time for you to prepare for the second action before the ping period starts. If dual mode is on, then the flow will be (start period) -> (ping period) -> (dual period) -> (ping period). If both dual mode and continuous mode are on, then the flow will be (start period) -> (ping period) -> (dual period) -> (ping period) -> (rest period) -> … .</string>
     <string name="dual_period_message">Dual Period: %d</string>
 </resources>

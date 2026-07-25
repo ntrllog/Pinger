@@ -1,6 +1,5 @@
 package ntrllog.github.io.pinger
 
-import android.content.Intent
 import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.SoundPool
@@ -8,7 +7,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.TypedValue
-import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -111,24 +109,6 @@ class MainActivity : AppCompatActivity() {
                 if (isChecked) LinearLayout.VISIBLE else LinearLayout.INVISIBLE
         }
     }
-
-    /*
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu, menu)
-        return true
-    }*/
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean =
-        when (item.itemId) {
-            R.id.explanation -> {
-                startActivity(Intent(this, ExplanationActivity::class.java))
-                true
-            }
-
-            else -> {
-                super.onOptionsItemSelected(item)
-            }
-        }
 
     private fun toggleAction() {
         hideKeyboard()
