@@ -12,9 +12,11 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -29,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var statusText: TextView
     private lateinit var playPauseButton: ImageButton
     private lateinit var stopButton: ImageButton
+    private lateinit var buttonsLayout: RelativeLayout
 
     private lateinit var handler: Handler
 
@@ -75,6 +78,7 @@ class MainActivity : AppCompatActivity() {
         stopButton.setOnClickListener {
             stopIt()
         }
+        buttonsLayout = findViewById(R.id.buttons_layout)
 
         handler = Handler(Looper.getMainLooper())
 
@@ -121,6 +125,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun stopIt() {
         currentlyRunning = false
+        setTimerAppearance(R.color.timer_idle_background, R.color.black)
         handler.removeCallbacksAndMessages(null)
         setStatusText("")
         playPauseButton.setImageResource(R.drawable.baseline_play_circle_outline_150)
@@ -131,6 +136,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun pauseIt() {
         currentlyRunning = false
+        setTimerAppearance(R.color.timer_idle_background, R.color.black)
         handler.removeCallbacksAndMessages(null)
         playPauseButton.setImageResource(R.drawable.baseline_play_circle_outline_150)
     }
@@ -159,6 +165,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startStartPeriod() {
+        setTimerAppearance(R.color.timer_idle_background, R.color.black)
         val startPeriodSeconds = getEditTextValue(R.id.start_period)
         var countdown = startPeriodSeconds
 
@@ -192,6 +199,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startPingPeriod() {
+        setTimerAppearance(R.color.timer_ping_background, R.color.timer_ping_background)
         val pingPeriodSeconds = getEditTextValue(R.id.ping_period)
         var countdown = pingPeriodSeconds
 
@@ -231,6 +239,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startRestPeriod() {
+        setTimerAppearance(R.color.timer_rest_background, R.color.timer_rest_background)
         val restPeriodSeconds = getEditTextValue(R.id.rest_period)
         var countdown = restPeriodSeconds
 
@@ -264,6 +273,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun resumePingPeriod() {
+        setTimerAppearance(R.color.timer_ping_background, R.color.timer_ping_background)
         val pingPeriodSeconds = currCountdown
         var countdown = pingPeriodSeconds
 
@@ -299,6 +309,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startDualPeriod() {
+        setTimerAppearance(R.color.timer_dual_background, R.color.timer_dual_background)
         val dualPeriodSeconds = getEditTextValue(R.id.dual_period)
         var countdown = dualPeriodSeconds
 
@@ -339,6 +350,11 @@ class MainActivity : AppCompatActivity() {
     private fun setStatusText(message: String) {
         statusText.text = message
         statusText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 40F)
+    }
+
+    private fun setTimerAppearance(backgroundColorRes: Int, textColorRes: Int) {
+        buttonsLayout.setBackgroundColor(ContextCompat.getColor(this, backgroundColorRes))
+        statusText.setTextColor(ContextCompat.getColor(this, textColorRes))
     }
 
     private fun getEditTextValue(id: Int): Int =

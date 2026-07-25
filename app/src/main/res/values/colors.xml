@@ -7,4 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="timer_idle_background">#FFFFFFFF</color>
+    <color name="timer_ping_background">#FF4CAF50</color>
+    <color name="timer_rest_background">#FFFFEB3B</color>
+    <color name="timer_dual_background">#FF2196F3</color>
 </resources>

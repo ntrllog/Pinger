@@ -158,8 +158,11 @@
     <RelativeLayout
         android:id="@+id/buttons_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/linear_layout_dual_mode">
+        android:layout_height="match_parent"
+        android:layout_below="@id/linear_layout_dual_mode"
+        android:layout_marginTop="8dp"
+        android:background="@color/timer_idle_background"
+        android:padding="12dp">
 
         <ImageButton
             android:id="@+id/play_pause_button"
