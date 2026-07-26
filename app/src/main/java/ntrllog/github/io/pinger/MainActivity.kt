@@ -239,7 +239,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startRestPeriod() {
-        setTimerAppearance(R.color.timer_rest_background, R.color.timer_rest_background)
+        setTimerAppearance(R.color.timer_rest_background, R.color.black)
         val restPeriodSeconds = getEditTextValue(R.id.rest_period)
         var countdown = restPeriodSeconds
 
